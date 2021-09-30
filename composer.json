@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "phpcfdi/api-descarga-masiva",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Aplicación API para consumir el Servicio Web de Descarga Masiva del SAT",
+    "keywords": ["cfdi", "sat", "descarga-masiva", "mexico"],
     "license": "MIT",
     "require": {
         "php": "~8.0",
