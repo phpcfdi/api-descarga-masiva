@@ -6,7 +6,7 @@ Note: The documentation of this project is in Spanish, as this is the natural la
 
 ## Desarrollo
 
-Revisa las herramientas de GitHub:
+Comienza con la [Guía de contribución][contributing]. Y utiliza las herramientas de GitHub:
 
 - Conversaciones: Entra al [canal de desarrollo de phpCfdi][discord].
 - Discusiones: Donde podemos conversar acerca del desarrollo del proyecto.
@@ -21,3 +21,4 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 
 [discord]: https://discord.gg/aFGYXvX
 [license]: https://github.com/phpcfdi/api-descarga-masiva/blob/main/LICENSE
+[contributing]: https://github.com/phpcfdi/api-descarga-masiva/blob/main/CONTRIBUTING
