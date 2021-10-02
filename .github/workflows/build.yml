@@ -42,7 +42,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install project dependencies
-        run: composer update --no-interaction --no-progress --prefer-dist
+        run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Set environment file
         run: php -r "copy('.env.example', '.env');"
