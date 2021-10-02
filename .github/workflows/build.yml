@@ -50,11 +50,14 @@ jobs:
       - name: Set Laravel application key
         run: php artisan key:generate
 
-      - name: Tests
-        run: php artisan test
+      - name: PHP Insights
+        run: vendor/bin/rector --dry-run
+
+      - name: Static analysis
+        run: vendor/bin/phpstan analyse --no-progress --no-interaction --ansi
 
       - name: PHP Insights
         run: php artisan insights --no-interaction --ansi --format=github-action
 
-      - name: Static analysis
-        run: vendor/bin/phpstan analyse --no-progress --no-interaction --ansi
+      - name: Tests
+        run: php artisan test

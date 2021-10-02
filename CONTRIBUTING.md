@@ -62,6 +62,20 @@ Este proyecto usa [PHPStan][] a través de [Larastan][].
 php vendor/bin/phpstan analyse -v
 ```
 
+### `rector/rector`
+
+[Rector][] permite automatizar la modificación de código, se agregó al proyecto para hacer las modificaciones
+automáticas de PHP 7.3 a PHP 7.4. No está agregado a proceso de CI porque no es necesaria su ejecución continua.
+
+```shell
+php vendor/bin/rector process --dry-run
+```
+### Ejecución de todas las herramientas
+```shell
+composer dev:build
+```
+
+
 ## Otras herramientas
 
 ### Simulación de GitHub Actions
@@ -70,15 +84,6 @@ Con la herramienta [nektos/act][] se puede simular todos los flujos de trabajo e
 
 ```shell
 act -P ubuntu-latest=shivammathur/node:latest
-```
-
-## `rector/rector`
-
-[Rector][] permite automatizar la modificación de código, se agregó al proyecto para hacer las modificaciones
-automáticas de PHP 7.3 a PHP 7.4. No está agregado a proceso de CI porque no es necesaria su ejecución continua.
-
-```shell
-php vendor/bin/rector process --dry-run
 ```
 
 [PHPInsights]: https://phpinsights.com/
