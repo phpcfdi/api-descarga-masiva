@@ -50,7 +50,7 @@ jobs:
       - name: Set Laravel application key
         run: php artisan key:generate
 
-      - name: PHP Insights
+      - name: Rector
         run: vendor/bin/rector --dry-run
 
       - name: Static analysis
