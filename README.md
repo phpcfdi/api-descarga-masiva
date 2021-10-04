@@ -21,4 +21,4 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 
 [discord]: https://discord.gg/aFGYXvX
 [license]: https://github.com/phpcfdi/api-descarga-masiva/blob/main/LICENSE
-[contributing]: https://github.com/phpcfdi/api-descarga-masiva/blob/main/CONTRIBUTING
+[contributing]: https://github.com/phpcfdi/api-descarga-masiva/blob/main/CONTRIBUTING.md
