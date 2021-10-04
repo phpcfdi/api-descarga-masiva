@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
@@ -11,13 +13,12 @@ class RedirectIfAuthenticated
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  string|null  ...$guards
-     * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, ?string ...$guards): mixed
     {
-        $guards = empty($guards) ? [null] : $guards;
+        if ($guards === []) {
+            $guards = [null];
+        }
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {

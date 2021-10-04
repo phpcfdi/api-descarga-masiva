@@ -3,21 +3,17 @@
 declare(strict_types=1);
 
 use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
-use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenDefineFunctions;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenFinalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenPrivateMethods;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
 use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
+use NunoMaduro\PhpInsights\Domain\Metrics\Style\Style;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
-use SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowShortTernaryOperatorSniff;
 use SlevomatCodingStandard\Sniffs\Functions\FunctionLengthSniff;
-use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
+use SlevomatCodingStandard\Sniffs\Namespaces\ReferenceUsedNamesOnlySniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff;
 
 return [
 
@@ -41,7 +37,7 @@ return [
     | IDE
     |--------------------------------------------------------------------------
     |
-    | This options allow to add hyperlinks in your terminal to quickly open
+    | These options allow adding hyperlinks in your terminal to quickly open
     | files in your favorite IDE while browsing your PhpInsights report.
     |
     | Supported: "textmate", "macvim", "emacs", "sublime", "phpstorm",
@@ -68,29 +64,24 @@ return [
     */
 
     'exclude' => [
-        'app/Http/Middleware/RedirectIfAuthenticated.php',
-        'app/Providers/RouteServiceProvider.php',
+        'app/Http/Kernel.php',
         'app/Console/Kernel.php',
-        'app/Exceptions/Handler.php',
     ],
 
     'add' => [
         Classes::class => [
             ForbiddenFinalClasses::class,
         ],
+        Style::class => [
+            ReferenceUsedNamesOnlySniff::class
+        ]
     ],
 
     'remove' => [
-        AlphabeticallySortedUsesSniff::class,
-        DeclareStrictTypesSniff::class,
         DisallowMixedTypeHintSniff::class,
-        ForbiddenDefineFunctions::class,
         ForbiddenNormalClasses::class,
         ForbiddenTraits::class,
-        ParameterTypeHintSniff::class,
-        PropertyTypeHintSniff::class,
-        ReturnTypeHintSniff::class,
-        UselessFunctionDocCommentSniff::class,
+        DisallowShortTernaryOperatorSniff::class
     ],
 
     'config' => [
@@ -134,8 +125,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may adjust how many threads (core) PHPInsights can use to perform
-    | the analyse. This is optional, don't provide it and the tool will guess
-    | the max core number available. This accept null value or integer > 0.
+    | the analysis. This is optional, don't provide it and the tool will guess
+    | the max core number available. This accepts null value or integer > 0.
     |
     */
 
