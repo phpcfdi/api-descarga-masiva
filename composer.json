@@ -10,7 +10,8 @@
         "guzzlehttp/guzzle": "^7.3.0",
         "laravel/framework": "^8.62.0",
         "laravel/sanctum": "^2.11.2",
-        "laravel/tinker": "^2.5.0"
+        "laravel/tinker": "^2.5.0",
+        "phpcfdi/rfc": "^1.1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5.14",

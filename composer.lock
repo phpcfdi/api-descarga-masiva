@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8eecd54a6892b21b957a93a549f849a0",
+    "content-hash": "037fa94e16c408e883eb72176c7476cc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2042,6 +2042,58 @@
                 "source": "https://github.com/opis/closure/tree/3.6.2"
             },
             "time": "2021-04-09T13:42:10+00:00"
+        },
+        {
+            "name": "phpcfdi/rfc",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpcfdi/rfc.git",
+                "reference": "a4aa353dded23a72e1887763d2848bd196e63fba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpcfdi/rfc/zipball/a4aa353dded23a72e1887763d2848bd196e63fba",
+                "reference": "a4aa353dded23a72e1887763d2848bd196e63fba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.13",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpCfdi\\Rfc\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos C Soto",
+                    "email": "eclipxe13@gmail.com",
+                    "homepage": "http://eclipxe.com.mx/"
+                }
+            ],
+            "description": "PHP library to deal with Mexican RFC",
+            "homepage": "https://github.com/phpcfdi/rfc",
+            "keywords": [
+                "mexico",
+                "sat"
+            ],
+            "support": {
+                "issues": "https://github.com/phpcfdi/rfc/issues",
+                "source": "https://github.com/phpcfdi/rfc"
+            },
+            "time": "2021-03-16T22:58:06+00:00"
         },
         {
             "name": "phpoption/phpoption",
