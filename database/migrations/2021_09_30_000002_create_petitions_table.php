@@ -2,22 +2,24 @@
 
 declare(strict_types=1);
 
+use App\Models\Business;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * @see \App\Models\Petition
+ */
 class CreatePetitionsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
         Schema::create('petitions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_id');
+            $table->foreignIdFor(Business::class)
+                ->constrained()
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
             $table->enum('download_service', ['cfdi', 'retentions']);
             $table->enum('download_type', ['cfdi', 'metadata']);
             $table->enum('download_nature', ['issued', 'received']);
@@ -28,7 +30,6 @@ class CreatePetitionsTable extends Migration
                 'presented',
                 'verified',
                 'empty',
-                'downloading',
                 'completed',
                 'error',
             ]);
@@ -38,12 +39,7 @@ class CreatePetitionsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('petitions');
     }
