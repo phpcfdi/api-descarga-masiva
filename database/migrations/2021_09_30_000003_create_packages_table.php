@@ -20,9 +20,9 @@ class CreatePackagesTable extends Migration
                 ->constrained()
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
-            $table->lineString('sat_package');
+            $table->string('sat_package');
             $table->enum('status', ['pending', 'downloaded', 'error']);
-            $table->lineString('path');
+            $table->string('path');
 
             $table->timestamps();
         });

@@ -15,12 +15,12 @@ class CreateBusinessesTable extends Migration
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->id();
-            $table->lineString('rfc')->unique();
-            $table->lineString('legal_name');
-            $table->lineString('common_name');
+            $table->string('rfc')->unique();
+            $table->string('legal_name');
+            $table->string('common_name');
             $table->text('certificate');
             $table->text('private_key');
-            $table->lineString('passphrase');
+            $table->string('passphrase');
             $table->dateTime('valid_until');
 
             $table->timestamps();

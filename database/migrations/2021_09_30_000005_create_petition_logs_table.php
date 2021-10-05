@@ -21,7 +21,7 @@ class CreatePetitionLogsTable extends Migration
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
             $table->dateTime('occurred_at');
-            $table->lineString('message');
+            $table->string('message');
             $table->text('request');
             $table->text('response');
         });

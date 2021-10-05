@@ -33,7 +33,7 @@ class CreatePetitionsTable extends Migration
                 'completed',
                 'error',
             ]);
-            $table->lineString('sat_request')->nullable();
+            $table->string('sat_request')->nullable();
 
             $table->timestamps();
         });
