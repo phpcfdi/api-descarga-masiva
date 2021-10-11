@@ -6,12 +6,12 @@ services:
             context: ./vendor/laravel/sail/runtimes/8.0
             dockerfile: Dockerfile
             args:
-                WWWGROUP: '${WWWGROUP}'
+                WWWGROUP: '${WWWGROUP}:1000'
         image: sail-8.0/app
         ports:
-            - '8001:80'
+            - '${APP_PORT:-80}:80'
         environment:
-            WWWUSER: '${WWWUSER}'
+            WWWUSER: '${WWWUSER}:1000'
             LARAVEL_SAIL: 1
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
@@ -27,7 +27,7 @@ services:
     mysql:
         image: 'mysql:8.0'
         ports:
-            - '${FORWARD_DB_PORT:-3307}:3306'
+            - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_DATABASE: '${DB_DATABASE}'
