@@ -84,6 +84,7 @@ return [
         ForbiddenNormalClasses::class,
         ForbiddenPublicPropertySniff::class,
         ForbiddenTraits::class,
+        LineLengthSniff::class, // check by php_codesniffer
     ],
 
     'config' => [
@@ -92,10 +93,6 @@ return [
         ],
         CyclomaticComplexityIsHigh::class => [
             'maxComplexity' => 10,
-        ],
-        LineLengthSniff::class => [
-            'lineLimit' => 120,
-            'absoluteLineLimit' => 160,
         ],
         FunctionLengthSniff::class => [
             'maxLinesLength' => 25,
