@@ -53,6 +53,10 @@
             "@php artisan key:generate --ansi"
         ],
         "dev:phpstan": "@php vendor/bin/phpstan analyze",
+        "dev:code-style": [
+            "@php vendor/bin/phpcbf || true",
+            "@php vendor/bin/phpcs"
+        ],
         "dev:phpinsights-fix": "@php artisan insights -n --fix",
         "dev:phpinsights": "@php artisan insights -n",
         "dev:rector-fix": "@php vendor/bin/rector process",
@@ -62,6 +66,7 @@
             "@dev:rector-fix",
             "@dev:rector",
             "@dev:phpstan",
+            "@dev:code-style",
             "@dev:phpinsights-fix",
             "@dev:phpinsights",
             "@dev:test"
