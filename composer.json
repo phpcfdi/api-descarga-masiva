@@ -23,7 +23,8 @@
         "nunomaduro/phpinsights": "^2.0.1",
         "phpunit/phpunit": "^9.5.10",
         "rector/rector": "^0.11.56",
-        "squizlabs/php_codesniffer": "^3.6.0"
+        "slevomat/coding-standard": "^7.0",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {
@@ -52,6 +53,10 @@
             "@php artisan key:generate --ansi"
         ],
         "dev:phpstan": "@php vendor/bin/phpstan analyze",
+        "dev:code-style": [
+            "@php vendor/bin/phpcbf || true",
+            "@php vendor/bin/phpcs"
+        ],
         "dev:phpinsights-fix": "@php artisan insights -n --fix",
         "dev:phpinsights": "@php artisan insights -n",
         "dev:rector-fix": "@php vendor/bin/rector process",
@@ -61,6 +66,7 @@
             "@dev:rector-fix",
             "@dev:rector",
             "@dev:phpstan",
+            "@dev:code-style",
             "@dev:phpinsights-fix",
             "@dev:phpinsights",
             "@dev:test"
