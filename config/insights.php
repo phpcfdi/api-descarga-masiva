@@ -65,8 +65,6 @@ return [
     */
 
     'exclude' => [
-        'app/Http/Kernel.php',
-        'app/Console/Kernel.php',
     ],
 
     'add' => [
