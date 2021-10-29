@@ -12,8 +12,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class TokensController
 {
@@ -26,7 +26,7 @@ class TokensController
         /** @var User|null $user */
         $user = Auth::user();
         if ($user === null) {
-            throw new AccessDeniedHttpException('Datos de usuario y contraseña incorrectos.', code: 422);
+            throw new UnauthorizedHttpException('Bearer', 'Datos de usuario y contraseña incorrectos.');
         }
 
         $service = $this->createTokensService($user);

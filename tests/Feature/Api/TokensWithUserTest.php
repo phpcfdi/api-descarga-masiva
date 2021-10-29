@@ -64,7 +64,7 @@ final class TokensWithUserTest extends TestCase
             'password' => 'not-the-password',
         ]);
 
-        $response->assertStatus(403);
+        $response->assertStatus(401);
     }
 
     public function test_maximum_number_of_tokens_reached(): void

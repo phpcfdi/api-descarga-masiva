@@ -45,6 +45,6 @@ final class TokensWithoutUserTest extends TestCase
             'password' => 'not-the-password',
         ]);
 
-        $response->assertStatus(403);
+        $response->assertStatus(401);
     }
 }
