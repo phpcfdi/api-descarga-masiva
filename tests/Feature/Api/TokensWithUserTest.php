@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Api;
 
 use App\Models\User;
-use Illuminate\Support\Str;
+use App\Services\TokensService\TokensService;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -13,8 +13,8 @@ final class TokensWithUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @var User */
     private User $user;
+    private TokensService $service;
 
     protected function setUp(): void
     {
@@ -22,11 +22,12 @@ final class TokensWithUserTest extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         $this->user = $user;
+        $this->service = new TokensService($user);
     }
 
     private function createToken(): string
     {
-        return $this->user->createToken('api')->plainTextToken;
+        return $this->service->createToken();
     }
 
     public function test_create_new_token(): void
@@ -64,5 +65,20 @@ final class TokensWithUserTest extends TestCase
         ]);
 
         $response->assertStatus(403);
+    }
+
+    public function test_maximum_number_of_tokens_reached(): void
+    {
+        $tokensLimit = $this->service->getMaxTokens();
+        for ($i = 0; $i < $tokensLimit; $i++) {
+            $this->service->createToken();
+        }
+
+        $response = $this->postJson(route('tokens.login'), [
+            'email' => $this->user->{'email'},
+            'password' => 'password',
+        ]);
+
+        $response->assertStatus(400);
     }
 }
