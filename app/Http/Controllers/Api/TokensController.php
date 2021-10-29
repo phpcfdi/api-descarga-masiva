@@ -21,7 +21,7 @@ class TokensController
     {
         $credentials = $request->validated();
 
-        Auth::attempt($credentials);
+        Auth::once($credentials);
 
         /** @var User|null $user */
         $user = Auth::user();
