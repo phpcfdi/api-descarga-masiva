@@ -22,6 +22,7 @@ final class TokensWithUserTest extends TestCase
         /** @var User $user */
         $user = User::factory()->create();
         $this->user = $user;
+        config(['app.api.max-tokens-limit' => 3]);
         $this->service = new TokensService($user);
     }
 
