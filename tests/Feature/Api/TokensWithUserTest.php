@@ -56,6 +56,7 @@ final class TokensWithUserTest extends TestCase
         $token = $this->createToken();
         $response = $this->postJson(route('tokens.logout'), [], ['Authorization' => "Bearer $token"]);
         $response->assertStatus(204);
+        $this->assertEmpty($this->user->tokens()->get(), 'Tokens expected to be empty');
     }
 
     public function test_access_with_invalid_password(): void
