@@ -233,4 +233,8 @@ return [
 
     ],
 
+    'api' => [
+        'max-tokens-limit' => env('API_MAX_TOKENS_LIMIT'),
+    ],
+
 ];
