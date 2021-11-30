@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -26,6 +27,16 @@ class UserController extends Controller
             'password' => Hash::make($request->input('password')),
             'is_admin' => false,
         ]);
+        return new UserResource($user);
+    }
+
+    public function update(User $user, UpdateUserRequest $request): UserResource
+    {
+        $data = $request->validated();
+        if ($request->has('password')) {
+            $data['password'] = Hash::make($data['password']);
+        }
+        $user->update($data);
         return new UserResource($user);
     }
 
