@@ -17,4 +17,8 @@ Route::post('/initial-set-up', Api\InitialSetUp::class)
 Route::middleware(['auth:sanctum'])->group(function (Router $route): void {
     $route->post('/tokens/logout', [Api\TokensController::class, 'delete'])->name('tokens.logout');
     $route->get('/tokens/current', [Api\TokensController::class, 'current'])->name('tokens.current');
+
+    $route->middleware(['admin'])->group(function (Router $route): void {
+        $route->apiResource('users', Api\UserController::class);
+    });
 });
