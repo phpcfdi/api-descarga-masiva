@@ -11,6 +11,11 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function show(User $user): UserResource
+    {
+        return new UserResource($user);
+    }
+
     public function store(StoreUserRequest $request): UserResource
     {
         $user = User::create([

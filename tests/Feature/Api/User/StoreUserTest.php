@@ -7,23 +7,12 @@ namespace Tests\Feature\Api\User;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
 
-class StoreUserTest extends TestCase
+class StoreUserTest extends UserTestCase
 {
     use RefreshDatabase;
     use WithFaker;
-
-    private User $user;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        /** @var User $user */
-        $user = User::factory()->admin()->create();
-        $this->user = $user;
-        $this->actingAs($this->user);
-    }
 
     public function test_store_user(): void
     {
@@ -47,12 +36,7 @@ class StoreUserTest extends TestCase
 
     public function test_rejects_when_user_is_not_admin(): void
     {
-        $this->user->is_admin = false;
-        $this->user->save();
-
-        $response = $this->postJson(route('users.store'));
-
-        $response->assertForbidden();
+        $this->assertLoggedUserIsNotAdmin('post', route('users.store'));
     }
 
     public function test_send_empty_request(): void
