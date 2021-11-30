@@ -7,7 +7,7 @@ namespace Tests\Feature\Api\User;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StoreUserTest extends UserTestCase
 {
@@ -27,11 +27,13 @@ class StoreUserTest extends UserTestCase
             'password_confirmation' => $password,
         ]);
 
+        $user = User::where('email', $user->email)->firstOrFail();
         $response->assertCreated();
         $response->assertJson([
             'data' => $expectedData
         ]);
         $this->assertDatabaseHas('users', $expectedData);
+        $this->assertTrue(Hash::check($password, $user->password));
     }
 
     public function test_rejects_when_user_is_not_admin(): void
