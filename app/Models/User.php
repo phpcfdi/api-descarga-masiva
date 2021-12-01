@@ -17,7 +17,7 @@ class User extends Authenticatable
     use Notifiable;
 
     /** @var array<string> */
-    protected $fillable = ['id', 'name', 'email', 'password', 'is_admin'];
+    protected $fillable = ['name', 'email', 'password', 'is_admin'];
 
     /** @var array<string> */
     protected $hidden = ['password', 'remember_token'];
