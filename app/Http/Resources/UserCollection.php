@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class UserResource extends JsonResource
+class UserCollection extends ResourceCollection
 {
+    public function __construct(mixed $resource, private ?int $total = null)
+    {
+        parent::__construct($resource);
+    }
     /**
-     * Transform the resource into an array.
+     * Transform the resource collection into an array.
      *
      * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter
      *
@@ -20,9 +24,8 @@ class UserResource extends JsonResource
     public function toArray(mixed $request): mixed
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
+            'data' => $this->collection,
+            'total' => $this->total ?? $this->count(),
         ];
     }
 }
