@@ -28,6 +28,18 @@ class User extends Authenticatable
         'is_admin' => 'boolean',
     ];
 
+    /**
+     * returns allowed sorts fields the "-" is use by frontend to allow desc ordering
+     *
+     * @return array<string>
+     */
+    public static function allowedSorts(): array
+    {
+        return [
+            'name', '-name', 'email', '-email',
+        ];
+    }
+
     public function businesses(): BelongsToMany
     {
         return $this->belongsToMany(Business::class);
