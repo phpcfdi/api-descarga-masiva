@@ -7,7 +7,7 @@ namespace Tests\Feature\Api\User;
 use App\Models\User;
 use Tests\TestCase;
 
-class UserTestCase extends TestCase
+abstract class UserTestCase extends TestCase
 {
     protected User $user;
 
