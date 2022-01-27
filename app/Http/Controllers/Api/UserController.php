@@ -49,7 +49,7 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'is_admin' => false,
+            'is_admin' => $request->input('is_admin'),
         ]);
         return new UserResource($user);
     }

@@ -27,6 +27,7 @@ class UpdateUserTest extends UserTestCase
             'email' => $userUpdate->email,
             'password' => $password = $this->faker->password(10),
             'password_confirmation' => $password,
+            'is_admin' => true,
         ]);
 
         $user = User::where('email', $userUpdate->email)->firstOrFail();
@@ -35,6 +36,7 @@ class UpdateUserTest extends UserTestCase
             'data' => $expectedData
         ]);
         $this->assertTrue(Hash::check($password, $user->password));
+        $this->assertTrue($user->is_admin);
     }
 
     public function test_update_user_with_same_data(): void

@@ -25,6 +25,7 @@ class StoreUserTest extends UserTestCase
             'email' => $user->email,
             'password' => $password = $this->faker->password(10),
             'password_confirmation' => $password,
+            'is_admin' => false,
         ]);
 
         $user = User::where('email', $user->email)->firstOrFail();
@@ -45,26 +46,30 @@ class StoreUserTest extends UserTestCase
     {
         $response = $this->postJson(route('users.store'));
 
-        $response->assertInvalid(['name', 'email', 'password']);
+        $response->assertInvalid(['name', 'email', 'password', 'is_admin']);
     }
 
     public function test_invalid_email(): void
     {
         $response = $this->postJson(route('users.store'), [
-            'name' => $this->faker->name(),
             'email' => 'invalid-email',
-            'password' => $password = $this->faker->password(10),
-            'password_confirmation' => $password,
         ]);
 
         $response->assertInvalid(['email']);
     }
 
+    public function test_invalid_is_admin_field(): void
+    {
+        $response = $this->postJson(route('users.store'), [
+            'is_admin' => 'aaa'
+        ]);
+
+        $response->assertInvalid(['is_admin']);
+    }
+
     public function test_invalid_password_confirmed(): void
     {
         $response = $this->postJson(route('users.store'), [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->email(),
             'password' => $this->faker->password(10),
             'password_confirmation' => $this->faker->password(10),
         ]);
@@ -75,8 +80,6 @@ class StoreUserTest extends UserTestCase
     public function test_invalid_password_lower_than_10(): void
     {
         $response = $this->postJson(route('users.store'), [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->email(),
             'password' => $password = $this->faker->password(maxLength: 9),
             'password_confirmation' => $password,
         ]);
@@ -90,8 +93,6 @@ class StoreUserTest extends UserTestCase
         $user = User::factory()->create();
 
         $response = $this->postJson(route('users.store'), [
-            'name' => $user->name,
-            'email' => $user->email,
             'password' => $password = $this->faker->password(10),
             'password_confirmation' => $password,
         ]);
