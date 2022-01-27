@@ -21,25 +21,21 @@ class UserController extends Controller
      */
     public function index(PaginateCollectionRequest $request): UserCollection
     {
-        $limit = (int) $request->has('limit') ? $request->input('limit') : 30;
-        $page = (int) $request->has('page') ? $request->input('page') : 1;
-        $sort = $request->has('sort') ? $request->input('sort') : null;
-        $offset = ($limit * $page) - $limit;
-        $search = $request->has('search') ? $request->input('search') : null;
-        if ($search) {
-            $query = User::where('email', 'like', "%${search}%")->orWhere('name', 'LIKE', "%${search}%");
-        } else {
-            $query = User::limit($limit);
-        }
-        $total = $query->count();
+        /** default sort and order*/
+        $cleanedSort = 'email';
+        $order = 'asc';
+        $sort = $request->input('sort', null);
         if ($sort) {
             $order = str_contains($sort, '-') ? 'desc' : 'asc';
             /** @var string $cleanedSort */
             $cleanedSort = str_replace('-', '', $sort);
-            $query = $query->orderBy($cleanedSort, $order);
         }
-        $userCollection = $offset > 0 ? $query->offset((int) $offset)->get() : $query->get();
-        return new UserCollection($userCollection, $total);
+        $search = $request->input('search', null);
+        $query = User::orderBy($cleanedSort, $order);
+        if ($search) {
+            $query = $query->where('email', 'like', "%${search}%")->orWhere('name', 'like', "%${search}%");
+        }
+        return new UserCollection($query->paginate($request->input('limit', 30)));
     }
 
     public function show(User $user): UserResource

@@ -8,10 +8,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserCollection extends ResourceCollection
 {
-    public function __construct(mixed $resource, private ?int $total = null)
-    {
-        parent::__construct($resource);
-    }
     /**
      * Transform the resource collection into an array.
      *
@@ -24,8 +20,7 @@ class UserCollection extends ResourceCollection
     public function toArray(mixed $request): mixed
     {
         return [
-            'data' => $this->collection,
-            'total' => $this->total ?? $this->count(),
+            $this->collection,
         ];
     }
 }
