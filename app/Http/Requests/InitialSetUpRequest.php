@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Rules\UserTrait;
+
 class InitialSetUpRequest extends StoreUserRequest
 {
+    use UserTrait;
+
     /** @return array<string, array<mixed>> */
     public function rules(): array
     {
-        $rules = parent::rules();
-        $rules['email'] = ['required', 'email'];
-        return $rules;
+        return $this->baseRules();
     }
 }

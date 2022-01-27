@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Rules\UserTrait;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
 class StoreUserRequest extends FormRequest
 {
+    use UserTrait;
+
     /** @return array<string, array<mixed>> */
     public function rules(): array
     {
-        return [
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'confirmed', Password::min(10)],
-        ];
+        $rules = $this->baseRules();
+        $rules['is_admin'] = ['required', 'bool'];
+        return $rules;
     }
 }
